@@ -1,11 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import "boxicons";
+import React, { useState } from "react";
 
 function LoginForm({ error, login }) {
   const [details, setDetails] = useState({ name: "", email: "", password: "" });
+  const [showPass, setShowPass] = useState(false);
 
   function submitHandler(e) {
     e.preventDefault();
     login(details);
+  }
+  function showHandler() {
+    setShowPass(!showPass);
   }
 
   return (
@@ -40,19 +45,48 @@ function LoginForm({ error, login }) {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="password">Password:</label>
-          <input
-            type="text"
-            name="password"
-            id="password"
-            value={details.password}
-            onChange={(e) =>
-              setDetails({ ...details, password: e.target.value })
-            }
-            required
-          />
+          {showPass ? (
+            <>
+              <input
+                type="text"
+                name="password"
+                id="password"
+                value={details.password}
+                onChange={(e) =>
+                  setDetails({ ...details, password: e.target.value })
+                }
+                required
+              />
+
+              <box-icon
+                onClick={showHandler}
+                name="show"
+                type="solid"
+                color="rgba(103,101,101,0.47)"
+              ></box-icon>
+            </>
+          ) : (
+            <>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={details.password}
+                onChange={(e) =>
+                  setDetails({ ...details, password: e.target.value })
+                }
+                required
+              />
+              <box-icon
+                onClick={showHandler}
+                name="hide"
+                type="solid"
+                color="rgba(103,101,101,0.47)"
+              ></box-icon>
+            </>
+          )}
         </div>
         <input type="submit" value="SUBMIT" />
       </div>

@@ -57,6 +57,12 @@ form .form-inner .form-group {
   width: 300px;
   margin-bottom: 15px;
 }
+
+form .form-inner .form-group box-icon {
+  position: relative;
+  bottom: 30px;
+  left: 90%;
+}
 .form-inner .form-group label {
   display: block;
   color: #888;
