@@ -3,10 +3,15 @@ import LoginForm from "./components/LoginForm2";
 import React, { useState } from "react";
 
 function App() {
-  const adminUser = {
-    name: "max payne",
-    email: "payne@",
-    password: "123",
+  const Seller = {
+    name: "seller",
+    email: "seller@seller.com",
+    password: "1234",
+  };
+  const Purchaser = {
+    name: "purchaser",
+    email: "purchaser@purchaser.com",
+    password: "1234",
   };
   const [user, setUser] = useState({ name: "", email: "" });
   const [error, setError] = useState("");
@@ -14,12 +19,19 @@ function App() {
   let timer = setTimeout(() => setError(""), 1000);
   function Login(details) {
     if (
-      details.email === adminUser.email &&
-      details.password === adminUser.password
+      details.email === Seller.email &&
+      details.password === Seller.password 
+      
     ) {
       setUser({ name: details.name, email: details.email });
-    } else {
-      setError("irgendwas ist nicht richtig!");
+    } else if (
+      details.email === Purchaser.email &&
+      details.password === Purchaser.password 
+    ){
+      setUser({ name: details.name, email: details.email });
+    }
+    else {
+      setError("Credientials are incorrect");
       clearTimeout(timer);
     }
   }
@@ -30,10 +42,27 @@ function App() {
 
   return (
     <div className="App">
-      {user.email && user.name !== "" ? (
+     {user.email === Seller.email && user.name === Seller.name ? (
         <div className="welcome">
-          Welcome <b>{user.name}</b> <button onClick={Logout}>Logout</button>
+          Welcome <b>{user.name}</b>
+          <button>Tempreture Data</button>
+          <button>Refund</button>
+          <button>Previous Records</button>
+          <button onClick={Logout}>Logout</button>
         </div>
+      ) : (
+        <LoginForm error={error} login={Login} />
+      )}
+      <br></br>
+      {user.email === Purchaser.email && user.name === Purchaser.name ? (
+        <div className="welcome">
+          Welcome <b>{user.name}</b>
+          <button>Balance Check</button>
+          <button>Tempreture Data</button>
+          <button>Deposit</button>
+          <button onClick={Logout}>Logout</button>
+
+          </div>
       ) : (
         <LoginForm error={error} login={Login} />
       )}

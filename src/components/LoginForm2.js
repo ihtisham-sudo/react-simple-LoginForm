@@ -16,7 +16,7 @@ function LoginForm({ error, login }) {
   return (
     <form onSubmit={submitHandler}>
       <div className="form-inner">
-        <h2>Login</h2>
+        <h2>Login Form</h2>
         {error !== "" ? (
           <div className="popUp">{error}</div>
         ) : (
@@ -28,6 +28,7 @@ function LoginForm({ error, login }) {
             type="text"
             name="name"
             id="name"
+            placeholder=""
             value={details.name}
             onChange={(e) => setDetails({ ...details, name: e.target.value })}
             required
